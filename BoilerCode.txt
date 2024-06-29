@@ -1,0 +1,46 @@
+boiler code 
+
+--------------------Spring boot-----------------------------
+
+spring.application.name=SpringRestApi
+server.port = 3000
+
+spring.jpa.hibernate.ddl-auto=update
+spring.datasource.url=jdbc:mysql://localhost:3306/springboot
+spring.datasource.username=root
+spring.datasource.password=
+spring.datasource.driverClassName=com.mysql.cj.jdbc.Driver
+spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
+spring.jpa.show-sql=true
+
+-------------------Email sending
+ public static void send(String to,String sub,String msg){  
+         //Get properties object    
+         Properties props = new Properties();    
+         props.put("mail.smtp.host", "smtp.gmail.com");    
+         props.put("mail.smtp.socketFactory.port", "465");    
+         props.put("mail.smtp.socketFactory.class",    
+                   "javax.net.ssl.SSLSocketFactory");    
+         props.put("mail.smtp.auth", "true");    
+         props.put("mail.smtp.port", "465");    
+         //get Session   
+         Session session = Session.getDefaultInstance(props,    
+          new javax.mail.Authenticator() {    
+          protected PasswordAuthentication getPasswordAuthentication() {    
+          return new PasswordAuthentication("chintan.tops@gmail.com","fgwe tmmo vbva dxjq");  
+          }    
+         });    
+         //compose message    
+         try {    
+          MimeMessage message = new MimeMessage(session);    
+          message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));    
+          message.setSubject(sub);    
+          message.setText(msg);    
+          //send message  
+          Transport.send(message);    
+          System.out.println("message sent successfully");    
+         } catch (MessagingException e) {throw new RuntimeException(e);}    
+            
+   }  
+
+
